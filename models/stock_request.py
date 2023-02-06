@@ -184,8 +184,7 @@ class StockRequest(models.Model):
 
     def _prepare_picking(self):
         self.ensure_one()
-        # TODO: we have to check if we should select the appropriate internal type here relying on the warehouse
-        internal_type = self.env.ref('stock.picking_type_internal')
+        internal_type = self.location_id.warehouse_id.int_type_id
         picking_dict = {
             'request_id': self.id,
             'origin': self.name,
