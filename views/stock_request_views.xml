@@ -9,6 +9,7 @@
             <field name="arch" type="xml">
                 <tree decoration-info="state == 'draft'" decoration-muted="state == 'cancel'" string="Stock request list">
                     <field name="name"/>
+                    <field name="date" string="Date" />
                     <field name="location_id"/>
                     <field name="location_dest_id" groups="stock.group_stock_multi_locations"/>
                     <field name="request_user_id" options="{'no_create':True}"/>
