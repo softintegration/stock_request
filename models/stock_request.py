@@ -182,9 +182,12 @@ class StockRequest(models.Model):
             pickings |= self.env['stock.picking'].create(each._prepare_picking())
         pickings.action_confirm()
 
+    def _get_picking_type(self):
+        self.ensure_one()
+        return self.location_id.warehouse_id.int_type_id
+
     def _prepare_picking(self):
         self.ensure_one()
-        internal_type = self.location_id.warehouse_id.int_type_id
         picking_dict = {
             'request_id': self.id,
             'origin': self.name,
@@ -194,7 +197,7 @@ class StockRequest(models.Model):
             'date': self.date,
             'location_id': self.location_id.id,
             'location_dest_id': self.location_dest_id.id,
-            'picking_type_id': internal_type.id,
+            'picking_type_id': self._get_picking_type().id,
             'company_id': self.location_id.company_id.id,
             'move_lines': [(0, 0, move_line._prepare_move_line(self.location_id.id, self.location_dest_id.id,
                                                                company=self.location_id.company_id.id)) for move_line in
