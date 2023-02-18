@@ -44,6 +44,7 @@ class StockRequest(models.Model):
         states={'draft': [('readonly', False)]},
         domain=lambda self: self._get_default_location_domain())
 
+
     scheduled_date = fields.Datetime(
         'Scheduled Date', default=_default_scheduled_date)
 
