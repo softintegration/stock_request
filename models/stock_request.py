@@ -198,7 +198,7 @@ class StockRequest(models.Model):
             'date': self.date,
             'location_id': self.location_id.id,
             'location_dest_id': self.location_dest_id.id,
-            'picking_type_id': self._get_picking_type().id,
+            'picking_type_id': self.picking_type_id and self.picking_type_id.id or self._get_picking_type().id,
             'company_id': self.location_id.company_id.id,
             'move_lines': [(0, 0, move_line._prepare_move_line(self.location_id.id, self.location_dest_id.id,
                                                                company=self.location_id.company_id.id)) for move_line in

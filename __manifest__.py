@@ -7,7 +7,7 @@
  'qweb': [],
  'description': False,
  'images': [],
- 'version': '1.0.1.4',
+ 'version': '1.0.1.5',
  'category': 'Stock',
  'demo': [],
  'depends': ['stock',
