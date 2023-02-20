@@ -44,9 +44,9 @@ class StockRequest(models.Model):
         states={'draft': [('readonly', False)]},
         domain=lambda self: self._get_default_location_domain())
 
-
     scheduled_date = fields.Datetime(
-        'Scheduled Date', default=_default_scheduled_date)
+        'Scheduled Date', default=_default_scheduled_date,
+        states={'done': [('readonly', True)], 'cancel': [('readonly', True)]})
 
     move_type = fields.Selection([
         ('direct', 'As soon as possible'), ('one', 'When all products are ready')], 'Shipping Policy',
@@ -114,8 +114,6 @@ class StockRequest(models.Model):
             return_action['domain'] = [('id', 'in', picking_ids)]
             return_action['views'] = action.views
         return return_action
-
-
 
     def _get_pickings(self, count=False):
         self.ensure_one()
@@ -220,7 +218,7 @@ class StockRequestLine(models.Model):
     ], string='Status', default='draft')
     product_id = fields.Many2one('product.product', 'Product', ondelete="cascade", check_company=True,
                                  domain="[('type', '!=', 'service'), '|', ('company_id', '=', False), ('company_id', '=', company_id)]",
-                                 index=True,required=True)
+                                 index=True, required=True)
     product_uom_id = fields.Many2one('uom.uom', 'Unit of Measure', required=True,
                                      states={'draft': [('readonly', False)]}, readonly=True)
     product_uom_qty = fields.Float('Requested Qty', default=0.0, digits='Product Unit of Measure',
@@ -247,7 +245,7 @@ class StockRequestLine(models.Model):
             'name': self.product_id.name,
             'date': self.request_id.date,
             'company_id': company or self.env.company.id,
-            #'date_expected': self.date_expected,
+            # 'date_expected': self.date_expected,
             'product_id': self.product_id.id,
             'product_uom_qty': self.product_uom_qty,
             'product_uom': self.product_uom_id.id,

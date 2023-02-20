@@ -57,6 +57,7 @@
                                    attrs="{'readonly': [('state', '!=', 'draft')]}"/>
                         </group>
                         <group>
+                            <field name="scheduled_date" />
                             <field name="date" string="Date" />
                             <field name="request_user_id" options="{'no_create':True}"/>
                             <field name="picking_type_id" options="{'no_create_edit':True}"/>
