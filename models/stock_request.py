@@ -136,6 +136,7 @@ class StockRequest(models.Model):
             name = self.env.ref('stock_request.sequence_stock_request').next_by_id()
             each.write({'name': name})
         self._action_done()
+        self.move_line_ids.action_done()
         self._create_picking()
 
     def _action_done(self):
@@ -223,10 +224,12 @@ class StockRequestLine(models.Model):
                                      states={'draft': [('readonly', False)]}, readonly=True)
     product_uom_qty = fields.Float('Requested Qty', default=0.0, digits='Product Unit of Measure',
                                    required=True, states={'draft': [('readonly', False)]}, readonly=True)
+    received_qty = fields.Float('Received Qty', default=0.0, digits='Product Unit of Measure',
+                                compute='_compute_received_qty', store=False)
     location_id = fields.Many2one('stock.location', 'From', required=False, states={'draft': [('readonly', False)]},
-                                  readonly=True)
+                                  readonly=True, related='request_id.location_id', store=True)
     location_dest_id = fields.Many2one('stock.location', 'To', required=False, states={'draft': [('readonly', False)]},
-                                       readonly=True)
+                                       readonly=True, related='request_id.location_dest_id', store=True)
     company_id = fields.Many2one(related='request_id.company_id')
     date_expected = fields.Datetime('Expected Date', default=lambda self: fields.Datetime.now(), index=True,
                                     required=True,
@@ -253,3 +256,23 @@ class StockRequestLine(models.Model):
             'location_dest_id': location_dest_id,
             'request_line_id': self.id,
         }
+
+    @api.depends('request_id.pickings_count')
+    def _compute_received_qty(self):
+        for each in self:
+            related_moves = each.request_id._get_pickings().mapped("move_lines") \
+                .filtered(lambda mv: mv.state == 'done'
+                                     and mv.product_id.id == each.product_id.id
+                                     and mv.product_uom.id == each.product_uom_id.id
+                                     and mv.location_id.id == each.location_id.id
+                                     and mv.location_dest_id.id == each.location_dest_id.id)
+            # we have to take in account the returns
+            returned_moves = related_moves.mapped("move_dest_ids").filtered(lambda mv: mv.state == 'done')
+            each.received_qty = sum(move.product_uom_qty for move in related_moves) - sum(
+                move.product_uom_qty for move in returned_moves)
+
+    def action_done(self):
+        self._action_done()
+
+    def _action_done(self):
+        self.write({'state': 'done'})

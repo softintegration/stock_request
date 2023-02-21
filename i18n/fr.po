@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-04 14:59+0000\n"
-"PO-Revision-Date: 2023-02-04 14:59+0000\n"
+"POT-Creation-Date: 2023-02-21 06:25+0000\n"
+"PO-Revision-Date: 2023-02-21 06:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,8 @@ msgstr "Vue calendrier"
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form_inherited
 msgid "Can make transfers that go through transit locations"
-msgstr "Peut effectuer des transferts qui passent par un emplacement de transit"
+msgstr ""
+"Peut effectuer des transferts qui passent par un emplacement de transit"
 
 #. module: stock_request
 #: model:ir.model.fields.selection,name:stock_request.selection__stock_request__state__cancel
@@ -140,8 +141,9 @@ msgstr "Date de création, en général la date de la commande"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_form_view
+#: model_terms:ir.ui.view,arch_db:stock_request.stock_request_tree_view
 msgid "Date"
-msgstr "Date"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__location_dest_id
@@ -260,8 +262,9 @@ msgstr ""
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_stock_request__move_type
 msgid "It specifies goods to be deliver partially or all at once"
-msgstr "Indique si les marchandises doivent être livrées partiellement ou en une seule fois."
-
+msgstr ""
+"Indique si les marchandises doivent être livrées partiellement ou en une "
+"seule fois."
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request____last_update
@@ -329,12 +332,12 @@ msgstr ""
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_form_view
 msgid "Note"
-msgstr "Note"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__note
 msgid "Notes"
-msgstr "Notes"
+msgstr ""
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__message_needaction_counter
@@ -384,12 +387,19 @@ msgstr ""
 #. module: stock_request
 #: model:ir.model.fields,help:stock_request.field_res_config_settings__module_stock_request_by_transit
 msgid "Possibility to make transfers that go through transit locations."
-msgstr "Possibilité d'effectuer des transferts qui passent par un emplacement de transit."
+msgstr ""
+"Possibilité d'effectuer des transferts qui passent par un emplacement de "
+"transit."
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_line__product_id
 msgid "Product"
 msgstr "Article"
+
+#. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_line__received_qty
+msgid "Received Qty"
+msgstr "Quantité reçue"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__name
@@ -493,9 +503,7 @@ msgid "Stock Move"
 msgstr "Stock déplacer"
 
 #. module: stock_request
-#: model:ir.actions.act_window,name:stock_request.action_stock_request
 #: model:ir.model,name:stock_request.model_stock_request
-#: model:ir.ui.menu,name:stock_request.menu_stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form_inherited
 msgid "Stock request"
 msgstr "Demande de transfert"
@@ -520,6 +528,12 @@ msgstr "Liste de demandes de transferts"
 #: model:ir.model.fields,field_description:stock_request.field_stock_picking__request_id
 msgid "Stock request source"
 msgstr "Demande de transfert source"
+
+#. module: stock_request
+#: model:ir.actions.act_window,name:stock_request.action_stock_request
+#: model:ir.ui.menu,name:stock_request.menu_stock_request
+msgid "Stock requests"
+msgstr "Demande de transfert"
 
 #. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.res_config_settings_view_form_inherited
@@ -591,16 +605,11 @@ msgstr "Lorsque tous les produits sont prêts"
 #: code:addons/stock_request/models/stock_request.py:0
 #, python-format
 msgid "You have to cancel related pickings before cancel the stock request %s"
-msgstr "Veuillez annuler les transferts liés avant d'annuler la demande de transfert %s"
+msgstr ""
+"Veuillez annuler les transferts liés avant d'annuler la demande de transfert"
+" %s"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_request_line
 msgid "stock.request.line"
 msgstr ""
-
-
-#. module: stock_request
-#: model:ir.actions.act_window,name:stock_request.action_stock_request
-#: model:ir.ui.menu,name:stock_request.menu_stock_request
-msgid "Stock requests"
-msgstr "Demandes de transfert"
