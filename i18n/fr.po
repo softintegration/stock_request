@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-21 06:25+0000\n"
-"PO-Revision-Date: 2023-02-21 06:25+0000\n"
+"POT-Creation-Date: 2023-02-25 12:40+0000\n"
+"PO-Revision-Date: 2023-02-25 12:40+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -370,6 +370,12 @@ msgid "Operation Type"
 msgstr "Type d'opération"
 
 #. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Operation Type is required before validation"
+msgstr "Type d'opération est obligatoire à la validation"
+
+#. module: stock_request
 #: model_terms:ir.ui.view,arch_db:stock_request.stock_request_form_view
 msgid "Operations"
 msgstr "Opérations"
@@ -395,11 +401,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:stock_request.field_stock_request_line__product_id
 msgid "Product"
 msgstr "Article"
-
-#. module: stock_request
-#: model:ir.model.fields,field_description:stock_request.field_stock_request_line__received_qty
-msgid "Received Qty"
-msgstr "Quantité reçue"
 
 #. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__name

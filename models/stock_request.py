@@ -2,7 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError,ValidationError
 from odoo.tools.float_utils import float_compare
 
 
@@ -125,10 +125,12 @@ class StockRequest(models.Model):
     def _check_action_done(self):
         for each in self:
             if not each.move_line_ids:
-                raise UserError(_("Stock request lines are required in order to validate"))
+                raise ValidationError(_("Stock request lines are required in order to validate"))
             if any(float_compare(line.product_uom_qty, 0.0, precision_rounding=line.product_id.uom_id.rounding) <= 0 for
                    line in each.move_line_ids):
-                raise UserError(_("All requested Qty(s) must be positive!"))
+                raise ValidationError(_("All requested Qty(s) must be positive!"))
+            if not each.picking_type_id:
+                raise ValidationError(_("Operation Type is required before validation"))
 
     def action_done(self):
         self._check_action_done()
