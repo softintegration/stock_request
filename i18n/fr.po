@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-02-25 12:40+0000\n"
-"PO-Revision-Date: 2023-02-25 12:40+0000\n"
+"POT-Creation-Date: 2024-05-15 04:49+0000\n"
+"PO-Revision-Date: 2024-05-15 04:49+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -403,6 +403,11 @@ msgid "Product"
 msgstr "Article"
 
 #. module: stock_request
+#: model:ir.model.fields,field_description:stock_request.field_stock_request_line__received_qty
+msgid "Received Qty"
+msgstr ""
+
+#. module: stock_request
 #: model:ir.model.fields,field_description:stock_request.field_stock_request__name
 msgid "Reference"
 msgstr "Référence"
@@ -502,6 +507,12 @@ msgstr ""
 #: model:ir.model,name:stock_request.model_stock_move
 msgid "Stock Move"
 msgstr "Stock déplacer"
+
+#. module: stock_request
+#: code:addons/stock_request/models/stock_request.py:0
+#, python-format
+msgid "Stock pickings"
+msgstr "Transferts"
 
 #. module: stock_request
 #: model:ir.model,name:stock_request.model_stock_request

@@ -97,23 +97,17 @@ class StockRequest(models.Model):
 
     def action_view_pickings(self):
         self.ensure_one()
-        picking_ids = self._get_pickings().ids
-        action = self.env.ref('stock.action_picking_tree_all')
-        return_action = {
-            'name': action.name,
-            'res_model': action.res_model,
-            'type': action.type,
+        domain = [('id', 'in', self._get_pickings().ids)]
+        return {
+            'name': _('Stock pickings'),
+            'view_mode': 'tree,form',
+            'views': [(self.env.ref('stock.vpicktree').id, 'tree'),
+                      (self.env.ref('stock.view_picking_form').id, 'form')],
+            'res_model': 'stock.picking',
+            'type': 'ir.actions.act_window',
             'target': 'current',
+            'domain': domain,
         }
-        if len(picking_ids) == 1:
-            return_action['res_id'] = picking_ids[0]
-            return_action['view_mode'] = 'form'
-            return_action['view_id'] = self.env.ref('stock.view_picking_form').id
-        else:
-            return_action['view_mode'] = 'tree,form'
-            return_action['domain'] = [('id', 'in', picking_ids)]
-            return_action['views'] = action.views
-        return return_action
 
     def _get_pickings(self, count=False):
         self.ensure_one()
